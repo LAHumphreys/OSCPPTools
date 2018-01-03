@@ -12,6 +12,8 @@ add_library(OSDevTools STATIC
     include/env.h
 )
 
+target_compile_features(Time PUBLIC cxx_std_11)
+
 target_include_directories(OSDevTools PUBLIC
     $<BUILD_INTERFACE:${OSDevTools_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:include>
