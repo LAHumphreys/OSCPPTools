@@ -7,8 +7,6 @@
 using namespace std;
 /*
  * Class to handle environmental variables
- *
- *
  */
 
 class ENV {

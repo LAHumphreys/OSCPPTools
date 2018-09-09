@@ -7,6 +7,9 @@
 #include "env.h"
 #include <mutex>
 #include <glob.h>
+#include <atomic>
+#include <fstream>
+
 
 using namespace std;
 
@@ -100,4 +103,35 @@ std::string OS::PWD() {
     free(c_pwd);
 
     return pwd;
+}
+
+bool OS::IsWSLSystem() {
+    enum class State: uint8_t {
+        UNCHECKED,
+        NOT_WSL,
+        WSL
+    };
+    static std::atomic<State> state(State::UNCHECKED);
+    auto currentState = state.load();
+
+    if (currentState == State::UNCHECKED) {
+        const char* location = "/proc/sys/kernel/osrelease";
+        std::ifstream osVersionFile;
+        osVersionFile.open(location);
+
+        std::string version;
+        std::getline(osVersionFile, version);
+
+        const std::string canary = "Microsoft";
+
+        if (version.find(canary) != version.npos) {
+            currentState = State::WSL;
+        } else {
+            currentState = State::NOT_WSL;
+        }
+
+        state.store(currentState);
+    }
+
+    return (currentState == State::WSL);
 }

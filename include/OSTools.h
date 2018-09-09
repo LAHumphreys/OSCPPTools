@@ -21,6 +21,9 @@ namespace OS {
     std::string Dirname(const std::string& path);
 
     bool Exists(const std::string& path);
+
+    // Determine if we are on a Windows Sub-system for linux
+    bool IsWSLSystem();
 };
 
 #endif
