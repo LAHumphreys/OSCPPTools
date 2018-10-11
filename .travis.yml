@@ -20,7 +20,7 @@ before_install:
   - cd ..
 
 script: 
-  - g++-6 --version
+  - g++-7 --version
   - cd Build
   - make
   - cd ..
