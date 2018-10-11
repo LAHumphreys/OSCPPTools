@@ -8,19 +8,17 @@ addons:
     packages:
       - cmake
       - cmake-data
-      - g++-6
+      - g++-7
 
 
 before_install:
+  - export CXX="g++-7"
+  - export CC="gcc-7"
   - mkdir Build
   - cd Build
   - cmake ..
   - cd ..
 
-install:
-  - export CXX="g++-6"
-  - export CC="gcc-6"
-  
 script: 
   - g++-6 --version
   - cd Build
