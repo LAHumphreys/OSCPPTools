@@ -12,7 +12,9 @@ add_library(OSDevTools STATIC
     include/env.h
 )
 
-target_compile_features(OSDevTools PUBLIC cxx_std_11)
+target_compile_features(OSDevTools PUBLIC cxx_std_17)
+
+target_link_libraries(OSDevTools PUBLIC stdc++fs)
 
 target_include_directories(OSDevTools PUBLIC
     $<BUILD_INTERFACE:${OSDevTools_SOURCE_DIR}/include>

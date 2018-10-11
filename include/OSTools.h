@@ -15,6 +15,9 @@ namespace OS {
 
     std::string PWD();
 
+    // Return the path to the current executable
+    std::string GetExe();
+
     std::string Join(const std::string& path1, const std::string& path2);
 
     std::string Basename(const std::string& path);

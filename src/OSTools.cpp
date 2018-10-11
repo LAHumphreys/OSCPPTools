@@ -9,6 +9,9 @@
 #include <glob.h>
 #include <atomic>
 #include <fstream>
+#include <OSTools.h>
+
+#include <experimental/filesystem>
 
 
 using namespace std;
@@ -93,6 +96,16 @@ bool OS::Exists(const std::string& filename)
         return true;
     }
     return false;
+}
+
+std::string OS::GetExe() {
+    std::string exe = "";
+    namespace fs = std::experimental::filesystem;
+    fs::path path("/proc/self/exe");
+    if (fs::exists(path) &&  fs::is_symlink(path)) {
+        exe = fs::read_symlink(path);
+    }
+    return exe;
 }
 
 std::string OS::PWD() {
